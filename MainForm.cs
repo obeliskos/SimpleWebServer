@@ -11,6 +11,9 @@ using System.Windows.Forms;
 
 namespace SimpleWebServer
 {
+    /// <summary>
+    /// Simple front end user interface for web server class written by github user aksakalli.  Will likely enhance this over time.
+    /// </summary>
     public partial class MainForm : Form
     {
         private SimpleHTTPServer simpleServer;
@@ -44,8 +47,11 @@ namespace SimpleWebServer
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            simpleServer.Stop();
-            lblStatus.Text = "Server stopped.";
+            if (simpleServer != null)
+            {
+                simpleServer.Stop();
+                lblStatus.Text = "Server stopped.";
+            }
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -56,7 +62,6 @@ namespace SimpleWebServer
             }
             catch(Exception ex)
             {
-
             }
         }
     }
