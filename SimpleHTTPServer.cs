@@ -15,14 +15,15 @@ namespace SimpleWebServer
     /// </summary>
     class SimpleHTTPServer 
     {
-        private readonly string[] _indexFiles = { 
+        public readonly string[] _indexFiles = { 
             "index.html", 
             "index.htm", 
             "default.html", 
-            "default.htm" 
+            "default.htm",
+            "SandboxLoaderWJS.htm" 
         };
 
-        private static IDictionary<string, string> _mimeTypeMappings = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase) {
+        public static IDictionary<string, string> _mimeTypeMappings = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase) {
             #region extension to MIME type list
             {".asf", "video/x-ms-asf"},
             {".asx", "video/x-ms-asf"},
@@ -54,6 +55,7 @@ namespace SimpleWebServer
             {".jpeg", "image/jpeg"},
             {".jpg", "image/jpeg"},
             {".js", "application/x-javascript"},
+            {".json", "application/json"},
             {".mf", "text/cache-manifest"},
             {".mml", "text/mathml"},
             {".mng", "video/x-mng"},

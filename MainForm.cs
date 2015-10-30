@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Security.Principal;
 using System.Text;
@@ -17,6 +18,7 @@ namespace SimpleWebServer
     public partial class MainForm : Form
     {
         private SimpleHTTPServer simpleServer;
+        private string version = "0.2";
 
         public MainForm()
         {
@@ -31,16 +33,24 @@ namespace SimpleWebServer
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            txtRootDirectory.Text = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
+            try { 
+                txtRootDirectory.Text = (string) Application.UserAppDataRegistry.GetValue("RootDirectory", Application.ExecutablePath);
+                numPort.Value = (decimal) Application.UserAppDataRegistry.GetValue("ListenPort", (decimal) 8080);
+            }
+            catch (Exception) { }
+
+            this.Text = "Simple Web Server v" + version;
+            this.notifyIcon.Text = "Simple Web Server v" + version;
 
             if (!IsAdministrator())
             {
-                MessageBox.Show("This program needs to be run as administrator");
+                MessageBox.Show("This program needs to be run as administrator", "Requires Elevated", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+
             simpleServer = new SimpleHTTPServer(txtRootDirectory.Text, (int) numPort.Value);
             lblStatus.Text = "Server started.";
         }
@@ -63,6 +73,40 @@ namespace SimpleWebServer
             catch(Exception ex)
             {
             }
+        }
+
+        private void btnPickRoot_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = folderBrowserDialog1.ShowDialog();
+
+            if (dr == System.Windows.Forms.DialogResult.OK)
+            {
+                txtRootDirectory.Text = folderBrowserDialog1.SelectedPath;
+            }
+        }
+
+        private void btnSaveDefaults_Click(object sender, EventArgs e)
+        {
+            Application.UserAppDataRegistry.SetValue("RootDirectory", txtRootDirectory.Text);
+            Application.UserAppDataRegistry.SetValue("ListenPort", (int) numPort.Value);
+        }
+
+        private void btnLocationExe_Click(object sender, EventArgs e)
+        {
+            txtRootDirectory.Text = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
+
+        }
+
+        private void btnLocationWorking_Click(object sender, EventArgs e)
+        {
+            txtRootDirectory.Text = Directory.GetCurrentDirectory();
+
+        }
+
+        private void btnClearDefaults_Click(object sender, EventArgs e)
+        {
+            Application.UserAppDataRegistry.DeleteValue("RootDirectory", false);
+            Application.UserAppDataRegistry.DeleteValue("ListenPort", false);
         }
     }
 }
