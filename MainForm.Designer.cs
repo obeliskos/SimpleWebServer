@@ -93,8 +93,9 @@
             // 
             // lblStatus
             // 
+            this.lblStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(12, 227);
+            this.lblStatus.Location = new System.Drawing.Point(12, 304);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(0, 13);
             this.lblStatus.TabIndex = 4;

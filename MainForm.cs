@@ -89,6 +89,8 @@ namespace SimpleWebServer
         {
             Application.UserAppDataRegistry.SetValue("RootDirectory", txtRootDirectory.Text);
             Application.UserAppDataRegistry.SetValue("ListenPort", (int) numPort.Value);
+
+            lblStatus.Text = "Settings Saved.";
         }
 
         private void btnLocationExe_Click(object sender, EventArgs e)
@@ -107,6 +109,7 @@ namespace SimpleWebServer
         {
             Application.UserAppDataRegistry.DeleteValue("RootDirectory", false);
             Application.UserAppDataRegistry.DeleteValue("ListenPort", false);
+            lblStatus.Text = "Defaults cleared.";
         }
     }
 }
