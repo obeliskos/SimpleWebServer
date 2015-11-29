@@ -14,7 +14,9 @@ using System.Xml.Serialization;
 namespace SimpleWebServer
 {
     /// <summary>
-    /// Simple front end user interface for web server class written by github user aksakalli.  Will likely enhance this over time.
+    /// Simple WebServer is a basic static file web server program written by GitHub user Obeliskos.
+    /// Uses web server class gist written by github user aksakalli.  
+    /// This program uses core .net functionality to ensure it runs well on the Windows 8.1 RT (Surface RT) .NET framework.
     /// </summary>
     public partial class MainForm : Form
     {
@@ -23,7 +25,6 @@ namespace SimpleWebServer
         public Settings settings = new Settings();
         string settingsPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\ServerSettings.xml";
         public static MainForm formInstance = null;
-        //public var _priceDataArray = from row in this.settings select new { Item = row.Key, Price = row.Value };
 
         public MainForm()
         {
@@ -40,13 +41,16 @@ namespace SimpleWebServer
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            //try { 
-            //    txtRootDirectory.Text = (string) Application.UserAppDataRegistry.GetValue("RootDirectory", Application.ExecutablePath);
-            //    numPort.Value = (decimal) Application.UserAppDataRegistry.GetValue("ListenPort", (decimal) 8080);
-            //}
-            //catch (Exception) { }
             formInstance = this;
 
+            // Detect if multiple instances are running and show System tray notification if so.
+            System.Diagnostics.Process[] processes = System.Diagnostics.Process.GetProcessesByName("SimpleWebServer");
+            if (processes.Length > 1) 
+            {
+                showNotification("Multiple servers are running", ToolTipIcon.Info, 3000);
+            }
+
+            // Load SystemSettings.xml if it exists
             if (System.IO.File.Exists(settingsPath))
             {
                 try
@@ -74,6 +78,7 @@ namespace SimpleWebServer
                 toolStripMainStatus.Text = "No settings file yet... using defaults.";
             }
 
+            // populate mime type listbox
             this.listBoxMimeExtensions.DataSource = settings._mimeTypeMappings.Keys.ToList();
 
             // Default root directory to exe location
@@ -81,8 +86,6 @@ namespace SimpleWebServer
             {
                 txtRootDirectory.Text = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
             }
-
-            // ELSE? Show Status strip label message indicating that we are using defaults
 
             this.Text = "Simple Web Server v" + version;
             this.notifyIcon.Text = "Simple Web Server v" + version;
@@ -121,23 +124,31 @@ namespace SimpleWebServer
 
         private void toolStripButtonStart_Click(object sender, EventArgs e)
         {
-            if (simpleServer != null)
-            {
-                simpleServer.Stop();
-                toolStripMainStatus.Text = "Server stopped.";
-            }
+            simpleServer = new SimpleHTTPServer(txtRootDirectory.Text, (int)numPort.Value);
+            showNotification("WebServer listening on port " + numPort.Value.ToString(), ToolTipIcon.Info, 3000);
+            toolStripServerStatus.Text = "Server Status : Listening on port " + numPort.Value.ToString();
         }
 
         private void toolStripButtonStop_Click(object sender, EventArgs e)
         {
-            simpleServer = new SimpleHTTPServer(txtRootDirectory.Text, (int)numPort.Value);
-            toolStripMainStatus.Text = "Server started.";
+            if (simpleServer != null)
+            {
+                simpleServer.Stop();
+                showNotification("WebServer stopped.", ToolTipIcon.Info, 3000);
+                toolStripServerStatus.Text = "Server Status : Stopped.";
+            }
         }
 
         private void toolStripButtonSaveSettings_Click(object sender, EventArgs e)
         {
             saveDefaults();
             toolStripMainStatus.Text = "Settings saved.";
+        }
+
+        private void toolStripButtonAbout_Click(object sender, EventArgs e)
+        {
+            AboutForm af = new AboutForm();
+            af.Show();
         }
 
         #endregion
@@ -170,10 +181,20 @@ namespace SimpleWebServer
 
         #region System Tray Icon
 
+        private void showNotification(string notifyText, ToolTipIcon icon, int timeout)
+        {
+            notifyIcon.ShowBalloonTip(timeout, "Simple Webserver", notifyText, icon);
+        }
+
         private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+        }
+
+        private void notifyIcon_Click(object sender, EventArgs e)
         {
             this.Show();
             this.WindowState = FormWindowState.Normal;
+            this.Activate();
         }
 
         private void MainForm_Resize(object sender, EventArgs e)
@@ -181,10 +202,10 @@ namespace SimpleWebServer
             if (FormWindowState.Minimized == WindowState)
             {
                 this.Hide();
+                showNotification("Minimized to System tray.", ToolTipIcon.Info, 3000);
             }
 
         }
-
         #endregion
 
         #region Mimetype management
@@ -307,10 +328,5 @@ namespace SimpleWebServer
 
         #endregion
 
-        private void toolStripButtonAbout_Click(object sender, EventArgs e)
-        {
-            AboutForm af = new AboutForm();
-            af.Show();
-        }
     }
 }

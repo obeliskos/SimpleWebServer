@@ -42,8 +42,8 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripMainStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButtonStop = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonStart = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonStop = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSaveSettings = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonAbout = new System.Windows.Forms.ToolStripButton();
             this.label3 = new System.Windows.Forms.Label();
@@ -58,6 +58,7 @@
             this.textBoxMimeExtension = new System.Windows.Forms.TextBox();
             this.groupBoxEditMimeType = new System.Windows.Forms.GroupBox();
             this.btnCancelMimeEdit = new System.Windows.Forms.Button();
+            this.toolStripServerStatus = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -124,6 +125,7 @@
             this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
             this.notifyIcon.Text = "Simple Web Server";
             this.notifyIcon.Visible = true;
+            this.notifyIcon.Click += new System.EventHandler(this.notifyIcon_Click);
             this.notifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseDoubleClick);
             // 
             // btnPickRoot
@@ -163,7 +165,8 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMainStatus});
+            this.toolStripMainStatus,
+            this.toolStripServerStatus});
             this.statusStrip1.Location = new System.Drawing.Point(0, 528);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(786, 22);
@@ -181,8 +184,8 @@
             this.toolStrip1.BackColor = System.Drawing.Color.LightSteelBlue;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButtonStop,
             this.toolStripButtonStart,
+            this.toolStripButtonStop,
             this.toolStripButtonSaveSettings,
             this.toolStripButtonAbout});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -190,19 +193,6 @@
             this.toolStrip1.Size = new System.Drawing.Size(786, 67);
             this.toolStrip1.TabIndex = 16;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripButtonStop
-            // 
-            this.toolStripButtonStop.AutoSize = false;
-            this.toolStripButtonStop.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonStop.Image")));
-            this.toolStripButtonStop.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonStop.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonStop.Name = "toolStripButtonStop";
-            this.toolStripButtonStop.Size = new System.Drawing.Size(64, 64);
-            this.toolStripButtonStop.Text = "Start";
-            this.toolStripButtonStop.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButtonStop.ToolTipText = "Start Server";
-            this.toolStripButtonStop.Click += new System.EventHandler(this.toolStripButtonStop_Click);
             // 
             // toolStripButtonStart
             // 
@@ -212,10 +202,23 @@
             this.toolStripButtonStart.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonStart.Name = "toolStripButtonStart";
             this.toolStripButtonStart.Size = new System.Drawing.Size(64, 64);
-            this.toolStripButtonStart.Text = "Stop";
+            this.toolStripButtonStart.Text = "Start";
             this.toolStripButtonStart.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButtonStart.ToolTipText = "Stop Server";
+            this.toolStripButtonStart.ToolTipText = "Start Server";
             this.toolStripButtonStart.Click += new System.EventHandler(this.toolStripButtonStart_Click);
+            // 
+            // toolStripButtonStop
+            // 
+            this.toolStripButtonStop.AutoSize = false;
+            this.toolStripButtonStop.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonStop.Image")));
+            this.toolStripButtonStop.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButtonStop.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonStop.Name = "toolStripButtonStop";
+            this.toolStripButtonStop.Size = new System.Drawing.Size(64, 64);
+            this.toolStripButtonStop.Text = "Stop";
+            this.toolStripButtonStop.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButtonStop.ToolTipText = "Stop Server";
+            this.toolStripButtonStop.Click += new System.EventHandler(this.toolStripButtonStop_Click);
             // 
             // toolStripButtonSaveSettings
             // 
@@ -257,6 +260,8 @@
             // 
             // listBoxMimeExtensions
             // 
+            this.listBoxMimeExtensions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.listBoxMimeExtensions.DisplayMember = "Key";
             this.listBoxMimeExtensions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxMimeExtensions.FormattingEnabled = true;
@@ -383,6 +388,14 @@
             this.btnCancelMimeEdit.UseVisualStyleBackColor = true;
             this.btnCancelMimeEdit.Click += new System.EventHandler(this.btnCancelMimeEdit_Click);
             // 
+            // toolStripServerStatus
+            // 
+            this.toolStripServerStatus.Name = "toolStripServerStatus";
+            this.toolStripServerStatus.Size = new System.Drawing.Size(695, 17);
+            this.toolStripServerStatus.Spring = true;
+            this.toolStripServerStatus.Text = "Server Status : Stopped.";
+            this.toolStripServerStatus.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -435,8 +448,8 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripMainStatus;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButtonStop;
         private System.Windows.Forms.ToolStripButton toolStripButtonStart;
+        private System.Windows.Forms.ToolStripButton toolStripButtonStop;
         private System.Windows.Forms.ToolStripButton toolStripButtonSaveSettings;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ListBox listBoxMimeExtensions;
@@ -451,6 +464,7 @@
         private System.Windows.Forms.GroupBox groupBoxEditMimeType;
         private System.Windows.Forms.Button btnCancelMimeEdit;
         private System.Windows.Forms.ToolStripButton toolStripButtonAbout;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripServerStatus;
     }
 }
 
