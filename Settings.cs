@@ -10,6 +10,8 @@ namespace SimpleWebServer
     {
         public string RootDirectory = "";
         public int ListenPort = 8080;
+        public bool MinimizeOnStartup = false;
+        public bool StartServerOnStartup = false;
 
         public SerializableDictionary<string, string> _mimeTypeMappings = new SerializableDictionary<string, string>() {
             #region extension to MIME type list

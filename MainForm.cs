@@ -21,7 +21,7 @@ namespace SimpleWebServer
     public partial class MainForm : Form
     {
         private SimpleHTTPServer simpleServer;
-        public string version = "0.3";
+        public string version = "0.4";
         public Settings settings = new Settings();
         string settingsPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\ServerSettings.xml";
         public static MainForm formInstance = null;
@@ -65,6 +65,8 @@ namespace SimpleWebServer
 
                     this.txtRootDirectory.Text = settings.RootDirectory;
                     this.numPort.Value = settings.ListenPort;
+                    this.chkStartMinimized.Checked = settings.MinimizeOnStartup;
+                    this.chkStartupServer.Checked = settings.StartServerOnStartup;
 
                     toolStripMainStatus.Text = "Settings loaded.";
                 }
@@ -89,11 +91,38 @@ namespace SimpleWebServer
 
             this.Text = "Simple Web Server v" + version;
             this.notifyIcon.Text = "Simple Web Server v" + version;
+        }
 
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            if (FormWindowState.Minimized == WindowState)
+            {
+                this.Hide();
+                showNotification("Minimized to System tray.", ToolTipIcon.Info, 3000);
+            }
+
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
             if (!IsAdministrator())
             {
                 MessageBox.Show("This program needs to be run as administrator", "Requires Elevated", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                // If they are not admin don't bother minimizing or starting up server automatically
+                return;
             }
+
+            if (settings.MinimizeOnStartup)
+            {
+                this.WindowState = FormWindowState.Minimized;
+            }
+
+            if (settings.StartServerOnStartup)
+            {
+                startServer();
+            }
+
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -115,6 +144,8 @@ namespace SimpleWebServer
         {
             settings.RootDirectory = txtRootDirectory.Text;
             settings.ListenPort = (int)numPort.Value;
+            settings.MinimizeOnStartup = this.chkStartMinimized.Checked;
+            settings.StartServerOnStartup = this.chkStartupServer.Checked;
 
             XmlSerializer s = new XmlSerializer(typeof(Settings));
             TextWriter w = new StreamWriter(settingsPath);
@@ -122,11 +153,16 @@ namespace SimpleWebServer
             w.Close();
         }
 
-        private void toolStripButtonStart_Click(object sender, EventArgs e)
+        private void startServer()
         {
             simpleServer = new SimpleHTTPServer(txtRootDirectory.Text, (int)numPort.Value);
             showNotification("WebServer listening on port " + numPort.Value.ToString(), ToolTipIcon.Info, 3000);
             toolStripServerStatus.Text = "Server Status : Listening on port " + numPort.Value.ToString();
+        }
+
+        private void toolStripButtonStart_Click(object sender, EventArgs e)
+        {
+            startServer();
         }
 
         private void toolStripButtonStop_Click(object sender, EventArgs e)
@@ -197,15 +233,6 @@ namespace SimpleWebServer
             this.Activate();
         }
 
-        private void MainForm_Resize(object sender, EventArgs e)
-        {
-            if (FormWindowState.Minimized == WindowState)
-            {
-                this.Hide();
-                showNotification("Minimized to System tray.", ToolTipIcon.Info, 3000);
-            }
-
-        }
         #endregion
 
         #region Mimetype management

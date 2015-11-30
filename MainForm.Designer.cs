@@ -41,13 +41,13 @@
             this.btnLocationWorking = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripMainStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripServerStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonStart = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonStop = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSaveSettings = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonAbout = new System.Windows.Forms.ToolStripButton();
             this.label3 = new System.Windows.Forms.Label();
-            this.listBoxMimeExtensions = new System.Windows.Forms.ListBox();
             this.textBoxMimeMapping = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -58,11 +58,17 @@
             this.textBoxMimeExtension = new System.Windows.Forms.TextBox();
             this.groupBoxEditMimeType = new System.Windows.Forms.GroupBox();
             this.btnCancelMimeEdit = new System.Windows.Forms.Button();
-            this.toolStripServerStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.chkStartMinimized = new System.Windows.Forms.CheckBox();
+            this.chkStartupServer = new System.Windows.Forms.CheckBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.listBoxMimeExtensions = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.groupBoxEditMimeType.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtRootDirectory
@@ -70,16 +76,16 @@
             this.txtRootDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtRootDirectory.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRootDirectory.Location = new System.Drawing.Point(20, 109);
+            this.txtRootDirectory.Location = new System.Drawing.Point(20, 96);
             this.txtRootDirectory.Name = "txtRootDirectory";
-            this.txtRootDirectory.Size = new System.Drawing.Size(533, 26);
+            this.txtRootDirectory.Size = new System.Drawing.Size(535, 26);
             this.txtRootDirectory.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(16, 79);
+            this.label1.Location = new System.Drawing.Point(16, 66);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(135, 20);
             this.label1.TabIndex = 3;
@@ -90,7 +96,7 @@
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(636, 87);
+            this.label2.Location = new System.Drawing.Point(638, 74);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(130, 20);
             this.label2.TabIndex = 5;
@@ -100,7 +106,7 @@
             // 
             this.numPort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.numPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numPort.Location = new System.Drawing.Point(646, 110);
+            this.numPort.Location = new System.Drawing.Point(648, 97);
             this.numPort.Maximum = new decimal(new int[] {
             49151,
             0,
@@ -132,7 +138,7 @@
             // 
             this.btnPickRoot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPickRoot.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPickRoot.Location = new System.Drawing.Point(559, 107);
+            this.btnPickRoot.Location = new System.Drawing.Point(561, 94);
             this.btnPickRoot.Name = "btnPickRoot";
             this.btnPickRoot.Size = new System.Drawing.Size(40, 28);
             this.btnPickRoot.TabIndex = 9;
@@ -143,7 +149,7 @@
             // btnLocationExe
             // 
             this.btnLocationExe.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLocationExe.Location = new System.Drawing.Point(104, 143);
+            this.btnLocationExe.Location = new System.Drawing.Point(104, 130);
             this.btnLocationExe.Name = "btnLocationExe";
             this.btnLocationExe.Size = new System.Drawing.Size(158, 34);
             this.btnLocationExe.TabIndex = 12;
@@ -154,7 +160,7 @@
             // btnLocationWorking
             // 
             this.btnLocationWorking.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLocationWorking.Location = new System.Drawing.Point(277, 143);
+            this.btnLocationWorking.Location = new System.Drawing.Point(277, 130);
             this.btnLocationWorking.Name = "btnLocationWorking";
             this.btnLocationWorking.Size = new System.Drawing.Size(198, 34);
             this.btnLocationWorking.TabIndex = 13;
@@ -167,9 +173,9 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMainStatus,
             this.toolStripServerStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 528);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 467);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(786, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(788, 22);
             this.statusStrip1.TabIndex = 15;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -178,6 +184,14 @@
             this.toolStripMainStatus.Name = "toolStripMainStatus";
             this.toolStripMainStatus.Size = new System.Drawing.Size(45, 17);
             this.toolStripMainStatus.Text = "Status :";
+            // 
+            // toolStripServerStatus
+            // 
+            this.toolStripServerStatus.Name = "toolStripServerStatus";
+            this.toolStripServerStatus.Size = new System.Drawing.Size(726, 17);
+            this.toolStripServerStatus.Spring = true;
+            this.toolStripServerStatus.Text = "Server Status : Stopped.";
+            this.toolStripServerStatus.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // toolStrip1
             // 
@@ -190,7 +204,7 @@
             this.toolStripButtonAbout});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(786, 67);
+            this.toolStrip1.Size = new System.Drawing.Size(788, 53);
             this.toolStrip1.TabIndex = 16;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -201,7 +215,7 @@
             this.toolStripButtonStart.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButtonStart.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonStart.Name = "toolStripButtonStart";
-            this.toolStripButtonStart.Size = new System.Drawing.Size(64, 64);
+            this.toolStripButtonStart.Size = new System.Drawing.Size(64, 50);
             this.toolStripButtonStart.Text = "Start";
             this.toolStripButtonStart.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButtonStart.ToolTipText = "Start Server";
@@ -214,7 +228,7 @@
             this.toolStripButtonStop.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButtonStop.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonStop.Name = "toolStripButtonStop";
-            this.toolStripButtonStop.Size = new System.Drawing.Size(64, 64);
+            this.toolStripButtonStop.Size = new System.Drawing.Size(64, 50);
             this.toolStripButtonStop.Text = "Stop";
             this.toolStripButtonStop.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButtonStop.ToolTipText = "Stop Server";
@@ -228,7 +242,7 @@
             this.toolStripButtonSaveSettings.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButtonSaveSettings.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonSaveSettings.Name = "toolStripButtonSaveSettings";
-            this.toolStripButtonSaveSettings.Size = new System.Drawing.Size(64, 58);
+            this.toolStripButtonSaveSettings.Size = new System.Drawing.Size(64, 50);
             this.toolStripButtonSaveSettings.Text = "Save";
             this.toolStripButtonSaveSettings.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.toolStripButtonSaveSettings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -243,7 +257,7 @@
             this.toolStripButtonAbout.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButtonAbout.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonAbout.Name = "toolStripButtonAbout";
-            this.toolStripButtonAbout.Size = new System.Drawing.Size(64, 64);
+            this.toolStripButtonAbout.Size = new System.Drawing.Size(64, 50);
             this.toolStripButtonAbout.Text = "About";
             this.toolStripButtonAbout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButtonAbout.Click += new System.EventHandler(this.toolStripButtonAbout_Click);
@@ -252,27 +266,11 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(21, 215);
+            this.label3.Location = new System.Drawing.Point(21, 203);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(113, 20);
             this.label3.TabIndex = 17;
             this.label3.Text = "Mime Types :";
-            // 
-            // listBoxMimeExtensions
-            // 
-            this.listBoxMimeExtensions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.listBoxMimeExtensions.DisplayMember = "Key";
-            this.listBoxMimeExtensions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBoxMimeExtensions.FormattingEnabled = true;
-            this.listBoxMimeExtensions.ItemHeight = 20;
-            this.listBoxMimeExtensions.Location = new System.Drawing.Point(28, 266);
-            this.listBoxMimeExtensions.Name = "listBoxMimeExtensions";
-            this.listBoxMimeExtensions.ScrollAlwaysVisible = true;
-            this.listBoxMimeExtensions.Size = new System.Drawing.Size(254, 204);
-            this.listBoxMimeExtensions.TabIndex = 19;
-            this.listBoxMimeExtensions.ValueMember = "Key";
-            this.listBoxMimeExtensions.Click += new System.EventHandler(this.listBoxMimeExtensions_Click);
             // 
             // textBoxMimeMapping
             // 
@@ -281,16 +279,16 @@
             this.textBoxMimeMapping.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxMimeMapping.Location = new System.Drawing.Point(24, 103);
             this.textBoxMimeMapping.Name = "textBoxMimeMapping";
-            this.textBoxMimeMapping.Size = new System.Drawing.Size(419, 23);
+            this.textBoxMimeMapping.Size = new System.Drawing.Size(421, 23);
             this.textBoxMimeMapping.TabIndex = 20;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
+            this.label4.Dock = System.Windows.Forms.DockStyle.Top;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(25, 246);
+            this.label4.Location = new System.Drawing.Point(0, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(83, 17);
+            this.label4.Size = new System.Drawing.Size(261, 17);
             this.label4.TabIndex = 21;
             this.label4.Text = "extensions :";
             // 
@@ -319,7 +317,7 @@
             // 
             this.btnAddMimeType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAddMimeType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddMimeType.Location = new System.Drawing.Point(25, 476);
+            this.btnAddMimeType.Location = new System.Drawing.Point(5, 1);
             this.btnAddMimeType.Name = "btnAddMimeType";
             this.btnAddMimeType.Size = new System.Drawing.Size(83, 31);
             this.btnAddMimeType.TabIndex = 24;
@@ -331,7 +329,7 @@
             // 
             this.btnRemoveMimeType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnRemoveMimeType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRemoveMimeType.Location = new System.Drawing.Point(114, 476);
+            this.btnRemoveMimeType.Location = new System.Drawing.Point(94, 0);
             this.btnRemoveMimeType.Name = "btnRemoveMimeType";
             this.btnRemoveMimeType.Size = new System.Drawing.Size(86, 31);
             this.btnRemoveMimeType.TabIndex = 25;
@@ -356,7 +354,7 @@
             this.textBoxMimeExtension.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxMimeExtension.Location = new System.Drawing.Point(24, 50);
             this.textBoxMimeExtension.Name = "textBoxMimeExtension";
-            this.textBoxMimeExtension.Size = new System.Drawing.Size(419, 23);
+            this.textBoxMimeExtension.Size = new System.Drawing.Size(421, 23);
             this.textBoxMimeExtension.TabIndex = 27;
             // 
             // groupBoxEditMimeType
@@ -370,9 +368,9 @@
             this.groupBoxEditMimeType.Controls.Add(this.label5);
             this.groupBoxEditMimeType.Controls.Add(this.btnUpdateMimeMapping);
             this.groupBoxEditMimeType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxEditMimeType.Location = new System.Drawing.Point(305, 262);
+            this.groupBoxEditMimeType.Location = new System.Drawing.Point(305, 235);
             this.groupBoxEditMimeType.Name = "groupBoxEditMimeType";
-            this.groupBoxEditMimeType.Size = new System.Drawing.Size(464, 199);
+            this.groupBoxEditMimeType.Size = new System.Drawing.Size(466, 199);
             this.groupBoxEditMimeType.TabIndex = 28;
             this.groupBoxEditMimeType.TabStop = false;
             this.groupBoxEditMimeType.Text = "mime type properties : ";
@@ -388,24 +386,74 @@
             this.btnCancelMimeEdit.UseVisualStyleBackColor = true;
             this.btnCancelMimeEdit.Click += new System.EventHandler(this.btnCancelMimeEdit_Click);
             // 
-            // toolStripServerStatus
+            // chkStartMinimized
             // 
-            this.toolStripServerStatus.Name = "toolStripServerStatus";
-            this.toolStripServerStatus.Size = new System.Drawing.Size(695, 17);
-            this.toolStripServerStatus.Spring = true;
-            this.toolStripServerStatus.Text = "Server Status : Stopped.";
-            this.toolStripServerStatus.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkStartMinimized.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkStartMinimized.AutoSize = true;
+            this.chkStartMinimized.Location = new System.Drawing.Point(646, 156);
+            this.chkStartMinimized.Name = "chkStartMinimized";
+            this.chkStartMinimized.Size = new System.Drawing.Size(116, 17);
+            this.chkStartMinimized.TabIndex = 29;
+            this.chkStartMinimized.Text = "Minimize on startup";
+            this.chkStartMinimized.UseVisualStyleBackColor = true;
+            // 
+            // chkStartupServer
+            // 
+            this.chkStartupServer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkStartupServer.AutoSize = true;
+            this.chkStartupServer.Location = new System.Drawing.Point(646, 184);
+            this.chkStartupServer.Name = "chkStartupServer";
+            this.chkStartupServer.Size = new System.Drawing.Size(130, 17);
+            this.chkStartupServer.TabIndex = 30;
+            this.chkStartupServer.Text = "Start server on startup";
+            this.chkStartupServer.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel1.Controls.Add(this.listBoxMimeExtensions);
+            this.panel1.Controls.Add(this.panel2);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Location = new System.Drawing.Point(25, 226);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(261, 223);
+            this.panel1.TabIndex = 33;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.btnAddMimeType);
+            this.panel2.Controls.Add(this.btnRemoveMimeType);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 184);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(261, 39);
+            this.panel2.TabIndex = 33;
+            // 
+            // listBoxMimeExtensions
+            // 
+            this.listBoxMimeExtensions.DisplayMember = "Key";
+            this.listBoxMimeExtensions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBoxMimeExtensions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBoxMimeExtensions.FormattingEnabled = true;
+            this.listBoxMimeExtensions.ItemHeight = 20;
+            this.listBoxMimeExtensions.Location = new System.Drawing.Point(0, 17);
+            this.listBoxMimeExtensions.Name = "listBoxMimeExtensions";
+            this.listBoxMimeExtensions.ScrollAlwaysVisible = true;
+            this.listBoxMimeExtensions.Size = new System.Drawing.Size(261, 167);
+            this.listBoxMimeExtensions.TabIndex = 34;
+            this.listBoxMimeExtensions.ValueMember = "Key";
+            this.listBoxMimeExtensions.Click += new System.EventHandler(this.listBoxMimeExtensions_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(786, 550);
+            this.ClientSize = new System.Drawing.Size(788, 489);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.chkStartupServer);
+            this.Controls.Add(this.chkStartMinimized);
             this.Controls.Add(this.groupBoxEditMimeType);
-            this.Controls.Add(this.btnRemoveMimeType);
-            this.Controls.Add(this.btnAddMimeType);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.listBoxMimeExtensions);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
@@ -421,6 +469,7 @@
             this.Text = "Simple Web Server v#.##";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.Resize += new System.EventHandler(this.MainForm_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).EndInit();
             this.statusStrip1.ResumeLayout(false);
@@ -429,6 +478,8 @@
             this.toolStrip1.PerformLayout();
             this.groupBoxEditMimeType.ResumeLayout(false);
             this.groupBoxEditMimeType.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -452,7 +503,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonStop;
         private System.Windows.Forms.ToolStripButton toolStripButtonSaveSettings;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ListBox listBoxMimeExtensions;
         private System.Windows.Forms.TextBox textBoxMimeMapping;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
@@ -465,6 +515,11 @@
         private System.Windows.Forms.Button btnCancelMimeEdit;
         private System.Windows.Forms.ToolStripButton toolStripButtonAbout;
         private System.Windows.Forms.ToolStripStatusLabel toolStripServerStatus;
+        private System.Windows.Forms.CheckBox chkStartMinimized;
+        private System.Windows.Forms.CheckBox chkStartupServer;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ListBox listBoxMimeExtensions;
+        private System.Windows.Forms.Panel panel2;
     }
 }
 
