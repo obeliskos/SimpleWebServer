@@ -4,9 +4,7 @@ A simple, static file webserver ui based on server class gist published here : h
 
 ![Screenshot](http://www.obeliskos.com/images/sws_ss1.png)
 
-This project is just packaging up a 
-
-So that it can be run on Windows RT 8.1 devices.
+While many static file webservers exist, i assembled this one to run on Windows RT 8.1 devices.  It should work equally as well on x86 Windows as well.
 
 While it can be used to serve up simple web sites, I have also modified it to correctly return the mime types needed for serving up a TridentSandbox web site with proper application cache, local storage and indexeddb.
 
