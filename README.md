@@ -1,6 +1,7 @@
 # SimpleWebServer
 
-A simple, static file webserver ui based on server class gist published here : https://gist.github.com/aksakalli/9191056
+A simple, static file webserver ui based on server class gist published here : 
+https://gist.github.com/aksakalli/9191056
 
 ![Screenshot](http://www.obeliskos.com/images/sws_ss1.png)
 
