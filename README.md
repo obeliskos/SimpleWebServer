@@ -1,7 +1,10 @@
 # SimpleWebServer
 
-This project is just packaging up a gist published here :
-https://gist.github.com/aksakalli/9191056
+A simple, static file webserver ui based on server class gist published here : https://gist.github.com/aksakalli/9191056
+
+![Screenshot](http://www.obeliskos.com/images/sws_ss1.png)
+
+This project is just packaging up a 
 
 So that it can be run on Windows RT 8.1 devices.
 
