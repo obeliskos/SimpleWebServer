@@ -27,6 +27,7 @@ namespace SimpleWebServer
         private string _rootDirectory;
         private HttpListener _listener;
         private int _port;
+        private bool localMode = true;
 
         public int Port
         {
@@ -41,6 +42,19 @@ namespace SimpleWebServer
         /// <param name="port">Port of the server.</param>
         public SimpleHTTPServer(string path, int port)
         {
+            this.Initialize(path, port);
+        }
+
+        /// <summary>
+        /// Construct server with given port.
+        /// </summary>
+        /// <param name="path">Directory path to serve.</param>
+        /// <param name="port">Port of the server.</param>
+        /// <param name="local">Indicates whether this is loopback only server</param>
+        public SimpleHTTPServer(string path, int port, bool local)
+        {
+            this.localMode = local;
+
             this.Initialize(path, port);
         }
 
@@ -70,7 +84,7 @@ namespace SimpleWebServer
         private void Listen()
         {
             _listener = new HttpListener();
-            _listener.Prefixes.Add("http://*:" + _port.ToString() + "/");
+            _listener.Prefixes.Add("http://" + (localMode?"localhost":"*") + ":" + _port.ToString() + "/");
             _listener.Start();
             while (true)
             {

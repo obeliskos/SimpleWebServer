@@ -21,10 +21,11 @@ namespace SimpleWebServer
     public partial class MainForm : Form
     {
         private SimpleHTTPServer simpleServer;
-        public string version = "0.4";
+        public string version = "0.5";
         public Settings settings = new Settings();
         string settingsPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\ServerSettings.xml";
         public static MainForm formInstance = null;
+        public bool isAdmin = false; 
 
         public MainForm()
         {
@@ -42,6 +43,8 @@ namespace SimpleWebServer
         private void MainForm_Load(object sender, EventArgs e)
         {
             formInstance = this;
+
+            isAdmin = IsAdministrator();
 
             // Detect if multiple instances are running and show System tray notification if so.
             System.Diagnostics.Process[] processes = System.Diagnostics.Process.GetProcessesByName("SimpleWebServer");
@@ -105,14 +108,6 @@ namespace SimpleWebServer
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            if (!IsAdministrator())
-            {
-                MessageBox.Show("This program needs to be run as administrator", "Requires Elevated", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                // If they are not admin don't bother minimizing or starting up server automatically
-                return;
-            }
-
             if (settings.MinimizeOnStartup)
             {
                 this.WindowState = FormWindowState.Minimized;
@@ -155,9 +150,9 @@ namespace SimpleWebServer
 
         private void startServer()
         {
-            simpleServer = new SimpleHTTPServer(txtRootDirectory.Text, (int)numPort.Value);
-            showNotification("WebServer listening on port " + numPort.Value.ToString(), ToolTipIcon.Info, 3000);
-            toolStripServerStatus.Text = "Server Status : Listening on port " + numPort.Value.ToString();
+            simpleServer = new SimpleHTTPServer(txtRootDirectory.Text, (int)numPort.Value, !isAdmin);
+            showNotification("WebServer listening " + (isAdmin?"":"locally") + " on port " + numPort.Value.ToString(), ToolTipIcon.Info, 3000);
+            toolStripServerStatus.Text = "Server Status : Listening " + (isAdmin ? "" : "locally") + " on port " + numPort.Value.ToString();
         }
 
         private void toolStripButtonStart_Click(object sender, EventArgs e)

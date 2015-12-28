@@ -34,6 +34,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -60,7 +61,7 @@
             // 
             this.linkLabelGithub.AutoSize = true;
             this.linkLabelGithub.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabelGithub.Location = new System.Drawing.Point(98, 137);
+            this.linkLabelGithub.Location = new System.Drawing.Point(98, 207);
             this.linkLabelGithub.Name = "linkLabelGithub";
             this.linkLabelGithub.Size = new System.Drawing.Size(300, 17);
             this.linkLabelGithub.TabIndex = 2;
@@ -72,7 +73,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(19, 109);
+            this.label2.Location = new System.Drawing.Point(19, 179);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(141, 17);
             this.label2.TabIndex = 3;
@@ -81,7 +82,7 @@
             // btnClose
             // 
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.Location = new System.Drawing.Point(360, 217);
+            this.btnClose.Location = new System.Drawing.Point(360, 248);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(84, 36);
             this.btnClose.TabIndex = 4;
@@ -99,11 +100,23 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "A simple, static file web server for windows and windows rt.";
             // 
+            // label4
+            // 
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(19, 98);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(425, 51);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "If you want your server to be visible to other pc\'s, you need to run this program" +
+    " as admininstrator.  If run with normal user credentials it will serve files onl" +
+    "y to http://localhost:port.";
+            // 
             // AboutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(461, 266);
+            this.ClientSize = new System.Drawing.Size(461, 297);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.label2);
@@ -126,5 +139,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
