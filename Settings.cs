@@ -12,6 +12,11 @@ namespace SimpleWebServer
         public int ListenPort = 8080;
         public bool MinimizeOnStartup = false;
         public bool StartServerOnStartup = false;
+        public bool UseCustomPrefixes = false;
+        public List<string> CustomPrefixes = new List<string>()
+        {
+            "http://localhost:8080/"
+        };
 
         public SerializableDictionary<string, string> _mimeTypeMappings = new SerializableDictionary<string, string>() {
             #region extension to MIME type list

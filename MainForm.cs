@@ -150,7 +150,7 @@ namespace SimpleWebServer
 
         private void startServer()
         {
-            simpleServer = new SimpleHTTPServer(txtRootDirectory.Text, (int)numPort.Value, !isAdmin);
+            simpleServer = new SimpleHTTPServer(txtRootDirectory.Text, (int)numPort.Value, !isAdmin, settings.UseCustomPrefixes, settings.CustomPrefixes);
             showNotification("WebServer listening " + (isAdmin?"":"locally") + " on port " + numPort.Value.ToString(), ToolTipIcon.Info, 3000);
             toolStripServerStatus.Text = "Server Status : Listening " + (isAdmin ? "" : "locally") + " on port " + numPort.Value.ToString();
         }

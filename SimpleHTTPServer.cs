@@ -28,6 +28,8 @@ namespace SimpleWebServer
         private HttpListener _listener;
         private int _port;
         private bool localMode = true;
+        private bool custom = false;
+        private List<string> customPrefixes;
 
         public int Port
         {
@@ -51,9 +53,11 @@ namespace SimpleWebServer
         /// <param name="path">Directory path to serve.</param>
         /// <param name="port">Port of the server.</param>
         /// <param name="local">Indicates whether this is loopback only server</param>
-        public SimpleHTTPServer(string path, int port, bool local)
+        public SimpleHTTPServer(string path, int port, bool local, bool custom, List<string> customPrefixes)
         {
             this.localMode = local;
+            this.custom = custom;
+            this.customPrefixes = customPrefixes;
 
             this.Initialize(path, port);
         }
@@ -84,7 +88,19 @@ namespace SimpleWebServer
         private void Listen()
         {
             _listener = new HttpListener();
-            _listener.Prefixes.Add("http://" + (localMode?"localhost":"*") + ":" + _port.ToString() + "/");
+
+            // Allow user to override prefixes via config file
+            if (this.custom) {
+                foreach (string prefix in this.customPrefixes)
+                {
+                    _listener.Prefixes.Add(prefix);
+                }
+            }
+            else
+            {
+                _listener.Prefixes.Add("http://" + (localMode?"localhost":"*") + ":" + _port.ToString() + "/");
+            }
+
             _listener.Start();
             while (true)
             {
