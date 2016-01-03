@@ -21,7 +21,7 @@ namespace SimpleWebServer
     public partial class MainForm : Form
     {
         private SimpleHTTPServer simpleServer;
-        public string version = "0.5";
+        public string version = "0.6";
         public Settings settings = new Settings();
         string settingsPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\ServerSettings.xml";
         public static MainForm formInstance = null;
@@ -84,7 +84,10 @@ namespace SimpleWebServer
             }
 
             // populate mime type listbox
-            this.listBoxMimeExtensions.DataSource = settings._mimeTypeMappings.Keys.ToList();
+            this.listBoxMimeExtensions.DataSource = settings._mimeTypeMappings.OrderBy(kp => kp.Key)
+                                      .Select(kp => kp.Key)
+                                      .ToList();
+
 
             // Default root directory to exe location
             if (txtRootDirectory.Text == "")
@@ -256,14 +259,23 @@ namespace SimpleWebServer
             }
 
             string ext = textBoxMimeExtension.Text;
+            string selMime = (string) listBoxMimeExtensions.SelectedItem;
+
             string mval = "";
-            bool result = settings._mimeTypeMappings.TryGetValue(ext, out mval);
+            bool result = settings._mimeTypeMappings.TryGetValue(selMime, out mval);
 
             if (result)
             {
                 settings._mimeTypeMappings[ext] = textBoxMimeMapping.Text;
+
+                if (selMime == ".newmimetype")
+                {
+                    settings._mimeTypeMappings.Remove(selMime);
+                }
+
                 refreshMimeList();
             }
+
         }
 
         private void selectMimeType()
@@ -314,7 +326,10 @@ namespace SimpleWebServer
         private void refreshMimeList()
         {
             // refresh listbox
-            this.listBoxMimeExtensions.DataSource = settings._mimeTypeMappings.Keys.ToList();
+            this.listBoxMimeExtensions.DataSource = settings._mimeTypeMappings.OrderBy(kp => kp.Key)
+                                      .Select(kp => kp.Key)
+                                      .ToList();
+
             // unselect listbox
             this.listBoxMimeExtensions.SelectedItem = null;
             // re-hide groupbox
@@ -341,8 +356,7 @@ namespace SimpleWebServer
 
             // rough mechanism to highlight recently added mime type and ensure visible
             listBoxMimeExtensions.Focus();
-            listBoxMimeExtensions.SelectedItem = newDictItem;
-            listBoxMimeExtensions.SelectedIndex = listBoxMimeExtensions.Items.Count - 1;
+            listBoxMimeExtensions.SelectedItem = ".newmimetype";
 
             // now display group box editor for selected (new) mime type
             selectMimeType();
